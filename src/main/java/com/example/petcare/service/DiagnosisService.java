@@ -76,4 +76,5 @@ public class DiagnosisService {
         Diagnosis diagnosis = diagnosisRepository.findById(id).orElse(null);
         return diagnosis!=null? diagnosis.get_DiagnosisDto():null;
     }
+
 }
