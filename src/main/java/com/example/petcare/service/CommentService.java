@@ -28,14 +28,14 @@ public class CommentService {
     @Autowired
     private SiteUserRepository userRepository;
 
-    public List<CommentDto> comments(long boardId) {
+    public List<CommentDto> comments(Long boardId) {
         return commentRepository.findByBoardId(boardId)
                 .stream()
                 .map(comment->comment.getCommentDto())
                 .collect(Collectors.toList());
     }
 
-    public CommentDto create(long boardId, CommentDto dto, Long userId) {
+    public CommentDto create(Long boardId, CommentDto dto, Long userId) {
         SiteUser siteUser = userRepository.findById(userId).orElse(null);
         Board board = boardRepository.findById(boardId).orElse(null);
         dto.setAuthor(siteUser);

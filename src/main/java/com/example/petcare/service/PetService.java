@@ -18,7 +18,7 @@ public class PetService {
     @Autowired
     SiteUserRepository userRepository;
 
-    public PetDto createPet(PetDto petDto, long userId) {
+    public PetDto createPet(PetDto petDto, Long userId) {
         SiteUser siteUser = userRepository.findById(userId).orElse(null);
         petDto.setSiteUser(siteUser);
         Pet created = petRepository.save(petDto.get_Pet());

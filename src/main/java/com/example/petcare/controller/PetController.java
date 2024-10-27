@@ -20,7 +20,7 @@ public class PetController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/user/pets")
+    @PostMapping("/user/pet")
     public ResponseEntity<PetDto> createPet(@RequestBody PetDto petDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -29,7 +29,7 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
 
-    @GetMapping("/user/pets")
+    @GetMapping("/user/pet")
     public ResponseEntity<List<PetDto>> getPets() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();

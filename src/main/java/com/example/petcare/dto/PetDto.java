@@ -29,7 +29,6 @@ public class PetDto {
 
     private String description;
 
-    @JsonIgnore
     public Pet get_Pet(){
         return Pet.builder()
                 .id(id)

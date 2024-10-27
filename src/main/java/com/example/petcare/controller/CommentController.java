@@ -20,14 +20,14 @@ public class CommentController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/boards/{boardId}/comments")
-    public ResponseEntity<List<CommentDto>> comments(@PathVariable long boardId) {
+    @GetMapping("/board/{boardId}/comment")
+    public ResponseEntity<List<CommentDto>> comments(@PathVariable Long boardId) {
         List<CommentDto> dtos = commentService.comments(boardId);
         return ResponseEntity.ok().body(dtos);
     }
 
-    @PostMapping("/boards/{boardId}/comments")
-    public ResponseEntity<CommentDto> createComment(@PathVariable long boardId, @RequestBody CommentDto dto) {
+    @PostMapping("/board/{boardId}/comment")
+    public ResponseEntity<CommentDto> createComment(@PathVariable Long boardId, @RequestBody CommentDto dto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Long userId = userService.get_user_by_username(username).getId();

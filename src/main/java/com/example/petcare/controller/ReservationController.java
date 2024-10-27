@@ -15,20 +15,20 @@ public class ReservationController {
     @Autowired
     ReservationService reservationService;
 
-    @GetMapping("/reservations/{id}")
+    @GetMapping("/reservation/{id}")
     public ResponseEntity<ReservationDto> getReservation(@PathVariable Long id) {
         ReservationDto reservationDto = reservationService.getReservation(id);
         return ResponseEntity.ok().body(reservationDto);
     }
 
-    @GetMapping("/pets/{petId}/reservations")
+    @GetMapping("/pet/{petId}/reservation")
     public ResponseEntity<List<ReservationDto>> getReservations(@PathVariable Long petId) {
         List<ReservationDto> dtos = reservationService.getReservations(petId);
         return ResponseEntity.ok().body(dtos);
     }
 
 
-    @PostMapping("/pets/{petId}/reservations")
+    @PostMapping("/pet/{petId}/reservation")
     public ResponseEntity<ReservationDto> createReservation(@PathVariable Long petId, @RequestBody ReservationDto reservationDto) {
            ReservationDto createdDto = reservationService.createReservation(petId,reservationDto);
            return ResponseEntity.ok().body(createdDto);

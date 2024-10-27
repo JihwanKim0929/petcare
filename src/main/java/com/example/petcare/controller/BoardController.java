@@ -22,19 +22,19 @@ public class BoardController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/boards")
+    @GetMapping("/board")
     public ResponseEntity<List<BoardDto>> boards(){
         List<BoardDto> dtos = boardService.boards();
         return ResponseEntity.ok().body(dtos);
     }
 
-    @GetMapping("/boards/{id}")
+    @GetMapping("/board/{id}")
     public ResponseEntity<BoardDto> show(@PathVariable Long id){
         BoardDto dto = boardService.get_board(id);
         return ResponseEntity.ok().body(dto);
     }
 
-    @PostMapping("/boards")
+    @PostMapping("/board")
     public ResponseEntity<BoardDto> create(@RequestBody BoardDto boardDto){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
