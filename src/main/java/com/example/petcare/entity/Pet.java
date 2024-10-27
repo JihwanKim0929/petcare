@@ -33,6 +33,9 @@ public class Pet {
 
     private String description;
 
+    private String image_url;
+
+
     @JsonIgnore
     public PetDto get_PetDto(){
         return PetDto.builder()
@@ -44,6 +47,7 @@ public class Pet {
                 .species(species)
                 .weight(weight)
                 .description(description)
+                .image_url(image_url)
                 .build();
     }
 }

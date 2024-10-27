@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,11 +23,11 @@ public class PetController {
     UserService userService;
 
     @PostMapping("/user/pet")
-    public ResponseEntity<PetDto> createPet(@RequestBody PetDto petDto) {
+    public ResponseEntity<PetDto> createPet(@RequestPart("image") MultipartFile image, @RequestPart("petDto") PetDto petDto) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Long userId = userService.get_user_by_username(username).getId();
-        PetDto createdDto = petService.createPet(petDto, userId);
+        PetDto createdDto = petService.createPet(petDto, userId, image);
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
 

@@ -7,8 +7,12 @@ import com.example.petcare.repository.PetRepository;
 import com.example.petcare.repository.SiteUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +22,13 @@ public class PetService {
     @Autowired
     SiteUserRepository userRepository;
 
-    public PetDto createPet(PetDto petDto, Long userId) {
+    public PetDto createPet(PetDto petDto, Long userId, MultipartFile image) throws IOException {
+        if(!image.isEmpty()){
+            String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
+            String fullPathName = "C:\\spring_image_test\\pet_thumbnail\\"+fileName;
+            image.transferTo(new File(fullPathName));
+            petDto.setImage_url(fullPathName);
+        }
         SiteUser siteUser = userRepository.findById(userId).orElse(null);
         petDto.setSiteUser(siteUser);
         Pet created = petRepository.save(petDto.get_Pet());

@@ -23,6 +23,8 @@ public class SiteUserDto {
 
     private String phone_num;
 
+    private String image_url;
+
     @JsonIgnore
     public SiteUser get_SiteUser(){
         return SiteUser.builder()
@@ -32,6 +34,7 @@ public class SiteUserDto {
                 .email(email)
                 .address(address)
                 .phone_num(phone_num)
+                .image_url(image_url)
                 .build();
     }
 }

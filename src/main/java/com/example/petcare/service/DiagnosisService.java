@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,8 +37,8 @@ public class DiagnosisService {
         diagnosisDto.setPet(pet);
 
         //save image and set path to diagnosis dto
-        String fileName = image.getOriginalFilename();
-        String fullPathName = "C:\\spring_image_test\\"+fileName;
+        String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
+        String fullPathName = "C:\\spring_image_test\\diagnosis\\"+fileName;
         image.transferTo(new File(fullPathName));
         diagnosisDto.setImage_url(fullPathName);
 

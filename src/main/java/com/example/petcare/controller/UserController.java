@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/user")
@@ -19,8 +22,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping
-    public ResponseEntity<SiteUserDto> createUser(@RequestBody SiteUserDto userDto) {
-        SiteUserDto createdDto = userService.createUser(userDto);
+    public ResponseEntity<SiteUserDto> createUser(@RequestPart("image") MultipartFile image, @RequestPart("userDto") SiteUserDto userDto) throws IOException {
+        SiteUserDto createdDto = userService.createUser(image,userDto);
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
 
