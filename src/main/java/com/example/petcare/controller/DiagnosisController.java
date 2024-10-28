@@ -17,7 +17,7 @@ public class DiagnosisController {
     @Autowired
     DiagnosisService diagnosisService;
 
-    @PostMapping("/pets/{petId}/diagnosis")
+    @PostMapping("/pet/{petId}/diagnosis")
     public ResponseEntity<DiagnosisDto> createDiagnosis(@PathVariable Long petId, @RequestPart("image") MultipartFile image, @RequestPart("diagnosisDto") DiagnosisDto diagnosisDto) throws IOException {
         DiagnosisDto createdDto = diagnosisService.createDiagnosis(petId, image, diagnosisDto);
         return createdDto!=null?
@@ -25,7 +25,7 @@ public class DiagnosisController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @GetMapping("/pets/{petId}/diagnosis")
+    @GetMapping("/pet/{petId}/diagnosis")
     public ResponseEntity<List<DiagnosisDto>> getDiagnosisList(@PathVariable Long petId) {
         List<DiagnosisDto> dtos = diagnosisService.get_diagnosis_list(petId);
         return ResponseEntity.status(HttpStatus.OK).body(dtos);

@@ -15,6 +15,7 @@ public class PetDto {
 
     private Long id;
 
+    @JsonIgnore
     private SiteUser siteUser;
 
     private String name;
@@ -31,6 +32,7 @@ public class PetDto {
 
     private String image_url;
 
+    @JsonIgnore
     public Pet get_Pet(){
         return Pet.builder()
                 .id(id)

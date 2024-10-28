@@ -38,7 +38,7 @@ public class DiagnosisService {
 
         //save image and set path to diagnosis dto
         String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-        String fullPathName = "C:\\spring_image_test\\diagnosis\\"+fileName;
+        String fullPathName = "C:\\spring_image_test\\diagnosis_image\\"+fileName;
         image.transferTo(new File(fullPathName));
         diagnosisDto.setImage_url(fullPathName);
 

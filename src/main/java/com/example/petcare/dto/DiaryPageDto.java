@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 public class DiaryPageDto {
     private Long id;
 
+    @JsonIgnore
     private Diary diary;
 
     private String content;

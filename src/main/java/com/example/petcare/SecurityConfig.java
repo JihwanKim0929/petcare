@@ -26,10 +26,10 @@ public class SecurityConfig {
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
                 .formLogin((formLogin)->formLogin
                         .loginProcessingUrl("/loginProc")
-                        .defaultSuccessUrl("/"))
+                        .defaultSuccessUrl("/user"))
                 .logout((logout)->logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                        .logoutSuccessUrl("/")
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/logoutOk")
                         .invalidateHttpSession(true))
                 ;
         return http.build();

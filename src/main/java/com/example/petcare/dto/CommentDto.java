@@ -19,6 +19,7 @@ public class CommentDto {
 
     private String content;
 
+    @JsonIgnore
     private Board board;
 
     private SiteUser author;

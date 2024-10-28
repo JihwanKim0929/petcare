@@ -15,21 +15,19 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @PostMapping
+    @PostMapping("/user")
     public ResponseEntity<SiteUserDto> createUser(@RequestPart("image") MultipartFile image, @RequestPart("userDto") SiteUserDto userDto) throws IOException {
         SiteUserDto createdDto = userService.createUser(image,userDto);
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
 
-    @GetMapping
+    @GetMapping("/user")
     public ResponseEntity<SiteUserDto> getUser() {
-        System.out.println("인증 성공");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
@@ -37,6 +35,10 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
+    @GetMapping("/logoutOk")
+    public ResponseEntity<String> logoutOk(){
+        return ResponseEntity.ok().body("Logout Success");
+    }
 
 }
 

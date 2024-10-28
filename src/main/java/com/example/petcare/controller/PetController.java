@@ -40,5 +40,9 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
     }
 
-
+    @GetMapping("/pet/{id}")
+    public ResponseEntity<PetDto> getPet(@PathVariable Long id) {
+        PetDto dto = petService.get_pet(id);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
 }
