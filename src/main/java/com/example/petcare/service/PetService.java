@@ -5,6 +5,7 @@ import com.example.petcare.entity.Pet;
 import com.example.petcare.entity.SiteUser;
 import com.example.petcare.repository.PetRepository;
 import com.example.petcare.repository.SiteUserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,6 +34,29 @@ public class PetService {
         petDto.setSiteUser(siteUser);
         Pet created = petRepository.save(petDto.get_Pet());
         return created.get_PetDto();
+    }
+
+    public void deletePet(PetDto petDto, Long userId) throws IOException {
+        SiteUser siteUser = userRepository.findById(userId).orElse(null);
+        petDto.setSiteUser(siteUser);
+        petRepository.delete(petDto.get_Pet());
+    }
+
+    public void updatePet(PetDto petDto, Long userId, MultipartFile image) throws IOException {
+        if(!image.isEmpty()){
+            String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
+            String fullPathName = "C:\\spring_image_test\\pet_thumbnail\\"+fileName;
+            image.transferTo(new File(fullPathName));
+            petDto.setImage_url(fullPathName);
+        }
+        SiteUser siteUser = userRepository.findById(userId).orElse(null);
+        petDto.setSiteUser(siteUser);
+
+        Pet pet = petRepository.findById(petDto.getId()).orElse(null);
+        if (pet != null) {
+            BeanUtils.copyProperties(petDto, pet, "id");
+            petRepository.save(pet);
+        }
     }
 
     public PetDto get_pet(Long petId){

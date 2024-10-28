@@ -31,6 +31,27 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
 
+    @PostMapping("/user/deletePet")//등록된 pet 삭제
+    public ResponseEntity<PetDto> deletePet(@RequestBody PetDto petDto) throws IOException{
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Long userId = userService.get_user_by_username(username).getId();
+        petService.deletePet(petDto, userId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(petDto);
+
+    }
+
+    @PostMapping("/user/updatePet")//등록된 pet 정보 수정
+    public ResponseEntity<PetDto> updatePet(@RequestPart("image") MultipartFile image, @RequestPart("petDto") PetDto petDto) throws IOException{
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Long userId = userService.get_user_by_username(username).getId();
+        petService.updatePet(petDto, userId, image);
+
+        return ResponseEntity.status(HttpStatus.OK).body(petDto);
+    }
+
     @GetMapping("/user/pet")
     public ResponseEntity<List<PetDto>> getPets() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
