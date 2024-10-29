@@ -26,7 +26,6 @@ const PetOwnerSignUpModalButton = () => {
   const { register, handleSubmit, errors, reset, setValue } = useForm();
   
   const onSubmit = (data) => {
-    console.log(data);
     const userDto = {
       username: data.username,
       password: data.password,
@@ -34,14 +33,15 @@ const PetOwnerSignUpModalButton = () => {
       address: data.address,
       phone_num: data.phonenumber
     };
-    const image = data.image;
+    console.log(data.image);
+    const dataImage = data.image;
     const formData = new FormData();
+    if (dataImage) {
+      formData.append("image", dataImage);
+    }
     const json = JSON.stringify(userDto);
     const blob = new Blob([json],{type: "application/json"});
     formData.append("userDto",blob);
-    if (image && image.length > 0) {
-      formData.append("image", image);
-    }
     const url = "http://localhost:8080/user";
     fetch(url,{
         method: 'POST',
