@@ -4,13 +4,13 @@ package com.example.petcare.dto;
 import com.example.petcare.entity.Pet;
 import com.example.petcare.entity.SiteUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PetDto {
 
     private Long id;
