@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import '../Sidebar.scss';
 import { Outlet } from "react-router-dom";
 import { Show, Box, Center, Text, useBreakpointValue } from '@chakra-ui/react';
@@ -15,6 +15,21 @@ import { Avatar } from "../../ui/avatar";
 const PetOwnerSidebar = () => {
 
   const isMdOrMore = useBreakpointValue({ base: false, md: true });
+  const [username, setUsername] = useState('');
+  const [userImageURL, setUserImageURL] = useState('');
+
+  useEffect(() => {
+    const user = sessionStorage.getItem('user');
+    if (!user) {
+      return;
+    }
+    
+    const parsedUser = JSON.parse(user);
+
+    setUsername(parsedUser.username);
+    setUserImageURL(parsedUser.image_url);
+    console.log("User Image URL:" + parsedUser.image_url);
+  }, []);
 
   return (
     <Fragment>
@@ -23,8 +38,8 @@ const PetOwnerSidebar = () => {
           <Box className="sidebar" hideBelow='md'>
             <ul className="sidebarComponents">
               <Center flexDirection='column' borderBottom="1.5px solid lightgray" marginLeft='0.75rem' marginRight='0.75rem' marginTop='1rem'>
-                <Avatar name="John Doe" src="https://bit.ly/sage-adebayo" w='125px' h='125px' />
-                <Text mt='0.5rem' mb='0.5rem' fontWeight='bold' fontSize='18px'>John Doe</Text>
+                <Avatar name={username} src={userImageURL} w='125px' h='125px' />
+                <Text mt='0.5rem' mb='0.5rem' fontWeight='bold' fontSize='18px'>{username}</Text>
               </Center>
               <br />
               <SidebarCategory CategoryIcon={BiHome} categoryName='Home' categoryLink='/user/petowner'/>

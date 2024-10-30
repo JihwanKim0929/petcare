@@ -30,8 +30,9 @@ const PetOwnerSignUpModalButton = () => {
       username: data.username,
       password: data.password,
       email: data.email,
-      address: data.address,
-      phone_num: data.phonenumber
+      address: data.homeaddress,
+      phone_num: data.phonenumber,
+      role: "PETOWNER"
     };
     console.log(data.image);
     const dataImage = data.image;
@@ -75,14 +76,11 @@ const PetOwnerSignUpModalButton = () => {
           </DialogHeader>
           <DialogCloseTrigger />
           <DialogBody pb={6}>
-            <Field label="User ID" required>
-              <Input placeholder='Input ID' {...register('userid', { required: true })}/>
+            <Field label="Email" required>
+              <Input placeholder="Enter your email" {...register('email', { required: true })}/>
             </Field>
             <Field label="Password" required mt={4}>
               <PasswordInput placeholder='Input password' {...register('password', { required: true })}/>
-            </Field>
-            <Field label="Email" required mt={4}>
-              <Input placeholder="Enter your email" {...register('email', { required: true })}/>
             </Field>
             <Field label="Name" required mt={4}>
               <Input placeholder='Input your name' {...register('username', { required: true })}/>
@@ -91,9 +89,9 @@ const PetOwnerSignUpModalButton = () => {
               <Input placeholder='Input phone number' {...register('phonenumber', { required: true })}/>
             </Field>
             <Field label="Home Address" mt={4}>
-              <Input placeholder='Input home address' {...register('address', { required: false })}/>
+              <Input placeholder='Input home address' {...register('homeaddress', { required: false })}/>
             </Field>
-            <Field label="image" mt={4}>
+            <Field label="Profile Image" mt={4}>
               <FileUploadRoot onChange={handleFileChange}>
                 <FileUploadTrigger asChild>
                   <Button variant="outline" size="sm">

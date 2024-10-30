@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Home.scss';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Text, Button } from "@chakra-ui/react";
 
 const Home = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = sessionStorage.getItem('user');
+    if (user) {
+        navigate('/user/petowner');
+    }
+  }, [navigate]);
 
   return (
     <div className="home">
