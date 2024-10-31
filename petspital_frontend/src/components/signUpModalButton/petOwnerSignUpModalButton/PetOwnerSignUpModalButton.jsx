@@ -76,14 +76,14 @@ const PetOwnerSignUpModalButton = () => {
           </DialogHeader>
           <DialogCloseTrigger />
           <DialogBody pb={6}>
-            <Field label="Email" required>
-              <Input placeholder="Enter your email" {...register('email', { required: true })}/>
+            <Field label="Username" required>
+              <Input placeholder="Enter your username" {...register('username', { required: true })}/>
             </Field>
             <Field label="Password" required mt={4}>
               <PasswordInput placeholder='Input password' {...register('password', { required: true })}/>
             </Field>
-            <Field label="Name" required mt={4}>
-              <Input placeholder='Input your name' {...register('username', { required: true })}/>
+            <Field label="Email" required mt={4}>
+              <Input placeholder='Input your name' {...register('email', { required: true })}/>
             </Field>
             <Field label="Phone Number" required mt={4}>
               <Input placeholder='Input phone number' {...register('phonenumber', { required: true })}/>

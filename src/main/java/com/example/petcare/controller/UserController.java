@@ -1,7 +1,6 @@
 package com.example.petcare.controller;
 
 import com.example.petcare.dto.SiteUserDto;
-import com.example.petcare.dto.LoginRequest;
 import com.example.petcare.entity.SiteUser;
 import com.example.petcare.service.UserService;
 import org.apache.catalina.User;
@@ -39,15 +38,5 @@ public class UserController {
     @GetMapping("/logoutOk")
     public ResponseEntity<String> logoutOk(){
         return ResponseEntity.ok().body("Logout Success");
-    }
-    
-    @PostMapping("/login")
-    public ResponseEntity<SiteUserDto> loginUser(@RequestBody LoginRequest loginRequest) {
-        SiteUserDto userDto = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
-        if (userDto != null) {
-            return ResponseEntity.ok(userDto);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
     }
 }

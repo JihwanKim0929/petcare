@@ -38,17 +38,4 @@ public class UserService {
         SiteUser user = userRepository.findByUsername(username);
         return user!=null? user.get_SiteUserDto() : null;
     }
-
-    public SiteUserDto get_user_by_useremail(String email) {
-        SiteUser user = userRepository.findByEmail(email);
-        return user != null ? user.get_SiteUserDto() : null;
-    }
-
-    public SiteUserDto login(String email, String password) {
-        SiteUserDto userDto = get_user_by_useremail(email);
-        if (userDto != null && passwordEncoder.matches(password, userDto.getPassword())) {
-            return userDto;
-        }
-        return null;
-    }
 }

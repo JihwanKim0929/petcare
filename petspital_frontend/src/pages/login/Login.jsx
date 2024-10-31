@@ -28,7 +28,10 @@ const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8080/login', {
+            console.log('Email:', email); 
+            console.log('Password:', password);
+            console.log(JSON.stringify({ email, password }));
+            const response = await fetch('http://localhost:8080/loginProc', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
