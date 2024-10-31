@@ -7,7 +7,7 @@ import { toaster } from "../../components/ui/toaster";
 
 const Login = () => {
 
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
@@ -28,21 +28,20 @@ const Login = () => {
 
     const handleLogin = async () => {
         try {
-            console.log('Email:', email); 
-            console.log('Password:', password);
-            console.log(JSON.stringify({ email, password }));
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
             const response = await fetch('http://localhost:8080/loginProc', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
+                headers: {},
+                body: formData
             });
 
-            if (response.status === 401) {
+            if (!response.ok) {
+                const errorText = await response.text();
                 toaster.create({
                     title: "Login failed.",
-                    description: "Invalid email or password.",
+                    description: errorText || "Invalid email or password.",
                     status: "error",
                     duration: 3000,
                     isClosable: true
@@ -50,9 +49,6 @@ const Login = () => {
                 return;
             }
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
             const user = await response.json();
 
             if (user) {
@@ -98,8 +94,8 @@ const Login = () => {
                     <img src={process.env.PUBLIC_URL + "/assets/images/logo1.png"} alt="" className="logo" />
                     <Text className="title" fontSize={{ base: '1.5rem', md: '2rem', lg: '2rem' }}>Sign in to Petspital</Text>
                     <div className="inputContainer">
-                        <Text className="desc">Email</Text>
-                        <Input className='input' placeholder='Input Email' onChange={(e) => setEmail(e.target.value)}/>
+                        <Text className="desc">Username</Text>
+                        <Input className='input' placeholder='Input Username' onChange={(e) => setUsername(e.target.value)}/>
                     </div>
                     <div className="inputContainer">
                         <Text className="desc">Password</Text>
