@@ -3,6 +3,9 @@ package com.example.petcare.controller;
 import com.example.petcare.dto.SiteUserDto;
 import com.example.petcare.entity.SiteUser;
 import com.example.petcare.service.UserService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+@Slf4j
 @RestController
 public class UserController {
 
@@ -32,6 +36,8 @@ public class UserController {
         String username = authentication.getName();
 
         SiteUserDto userDto = userService.get_user_by_username(username);
+        log.info(userDto.toString());
+        log.info("GETUSER");
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 

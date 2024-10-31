@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<form>
+    <input type="text" id="username">
+    <input type="text" id="password">
+    <button type="button" id="loginButton">login</button>
+
+</form>
+<script>
+    {
+        const btn = document.querySelector("#loginButton");
+        btn.addEventListener("click",function(){
+            const username = document.querySelector("#username").value;
+            const password = document.querySelector("#password").value;
+            const formData = new FormData();
+            formData.append("username",username);
+            formData.append("password",password);
+            console.log(formData);
+            const url = "http://localhost:8080/loginProc";
+            fetch(url,{
+                method: 'POST',
+                body: formData,
+                headers: {}
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); 
+            })
+            .then(data => {
+                console.log("Success:", data);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        })
+    }
+</script>
+</body>
+</html>

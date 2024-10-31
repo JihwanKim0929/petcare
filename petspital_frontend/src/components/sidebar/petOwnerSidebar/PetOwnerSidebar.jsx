@@ -25,7 +25,7 @@ const PetOwnerSidebar = () => {
     }
     
     const parsedUser = JSON.parse(user);
-
+    console.log(parsedUser.username);
     setUsername(parsedUser.username);
     setUserImageURL(parsedUser.image_url);
     console.log("User Image URL:" + parsedUser.image_url);
