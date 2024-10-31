@@ -1,7 +1,6 @@
 package com.example.petcare.dto;
 
 import com.example.petcare.entity.SiteUser;
-import com.example.petcare.entity.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -31,8 +30,6 @@ public class SiteUserDto {
 
     private String image_url;
 
-    private Role role;
-
     @JsonIgnore
     public SiteUser get_SiteUser(){
         return SiteUser.builder()
@@ -43,7 +40,6 @@ public class SiteUserDto {
                 .address(address)
                 .phone_num(phone_num)
                 .image_url(image_url)
-                .role(role)
                 .build();
     }
 }

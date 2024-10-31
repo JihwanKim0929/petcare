@@ -31,9 +31,6 @@ public class SiteUser {
 
     private String image_url;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "siteUser")
 //    private List<Pet> petList;
@@ -48,7 +45,6 @@ public class SiteUser {
                 .address(address)
                 .phone_num(phone_num)
                 .image_url(image_url)
-                .role(role)
                 .build();
     }
 }
